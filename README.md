@@ -2,7 +2,7 @@
 
 A custom Zabbix dashboard widget that displays firmware version distribution across your monitored hosts as an interactive pie chart.
 
-![Widget screenshot showing a pie chart with firmware version segments and a colour-coded legend](screenshot.png)
+![Widget screenshot showing a pie chart with firmware version segments and a colour-coded legend](screenshot-dashboard.png)
 
 ## Features
 
