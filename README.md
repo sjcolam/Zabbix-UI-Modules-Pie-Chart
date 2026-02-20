@@ -26,14 +26,14 @@ A custom Zabbix dashboard widget that displays firmware version distribution acr
 ### 1. Copy the module files
 
 ```bash
-cp -r firmware_pie_chart /usr/share/zabbix/ui/modules/
+cp -r Zabbix-UI-Modules-Pie-Chart /usr/share/zabbix/ui/modules/
 ```
 
 ### 2. Set correct permissions
 
 ```bash
-find /usr/share/zabbix/ui/modules/firmware_pie_chart -type f -exec chmod 644 {} \;
-find /usr/share/zabbix/ui/modules/firmware_pie_chart -type d -exec chmod 755 {} \;
+find /usr/share/zabbix/ui/modules/Zabbix-UI-Modules-Pie-Chart -type f -exec chmod 644 {} \;
+find /usr/share/zabbix/ui/modules/Zabbix-UI-Modules-Pie-Chart -type d -exec chmod 755 {} \;
 ```
 
 ### 3. Enable the module in Zabbix
@@ -132,7 +132,7 @@ One firmware version per host is counted (the first matching item found).
 ## File structure
 
 ```
-firmware_pie_chart/
+Zabbix-UI-Modules-Pie-Chart/
 ├── manifest.json                          # Module registration
 ├── Widget.php                             # Root widget class
 ├── actions/
