@@ -1,0 +1,68 @@
+.fw-pie-widget {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 4px;
+    box-sizing: border-box;
+}
+
+.fw-pie-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
+    position: relative;
+}
+
+.fw-pie-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.fw-pie-legend {
+    flex: 0 0 auto;
+    padding-top: 6px;
+}
+
+.fw-pie-legend-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+}
+
+.fw-pie-legend-list li {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.fw-swatch {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.fw-ver {
+    font-weight: 600;
+}
+
+.fw-cnt {
+    color: #888;
+}
+
+.fw-pie-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 16px;
+    color: #e45959;
+    font-size: 13px;
+    text-align: center;
+}

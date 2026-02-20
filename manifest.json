@@ -1,0 +1,31 @@
+{
+    "manifest_version": 2.0,
+    "id": "firmware_pie_chart",
+    "type": "widget",
+    "name": "Firmware Version Pie Chart",
+    "namespace": "FirmwarePieChart",
+    "version": "1.5",
+    "author": "sjc",
+    "description": "Displays firmware version distribution as a pie chart. Filter hosts by group, name pattern, or inventory fields such as Vendor and Model.",
+    "actions": {
+        "widget.firmware_pie_chart.view": {
+            "class": "WidgetView",
+            "layout": "layout.widget",
+            "view": "widget.view"
+        },
+        "widget.firmware_pie_chart.edit": {
+            "class": "WidgetEdit",
+            "layout": "layout.widget"
+        }
+    },
+    "widget": {
+        "name": "Firmware Version Pie Chart",
+        "size": {"width": 6, "height": 5},
+        "js_class": "WidgetFirmwarePieChart",
+        "form_class": "WidgetForm"
+    },
+    "assets": {
+        "js": ["class.widget.js"],
+        "css": ["widget.css"]
+    }
+}
