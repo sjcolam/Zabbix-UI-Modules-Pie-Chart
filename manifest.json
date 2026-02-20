@@ -6,6 +6,7 @@
     "namespace": "FirmwarePieChart",
     "version": "1.5",
     "author": "sjc",
+    "url": "https://github.com/sjcolam/Zabbix-UI-Modules-Pie-Chart",
     "description": "Displays firmware version distribution as a pie chart. Filter hosts by group, name pattern, or inventory fields such as Vendor and Model.",
     "actions": {
         "widget.firmware_pie_chart.view": {
