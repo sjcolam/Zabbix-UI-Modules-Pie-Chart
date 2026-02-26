@@ -21,10 +21,12 @@ class WidgetView extends CControllerDashboardWidgetView {
 
     protected function doAction(): void {
         $fields        = $this->fields_values;
-        $groupids      = $fields['groupids']    ?? [];
-        $host_patterns = $fields['hostids']     ?? [];
-        $items         = $fields['items']       ?? [];
+        $groupids      = $fields['groupids']     ?? [];
+        $host_patterns = $fields['hostids']      ?? [];
+        $items         = $fields['items']        ?? [];
         $show_legend   = (bool) ($fields['show_legend'] ?? true);
+        $host_tags     = $fields['host_tags']    ?? [];
+        $tags_evaltype = $fields['host_tags_evaltype'] ?? TAG_EVAL_TYPE_AND_OR;
 
         $inv_field_1 = strtolower(trim($fields['inv_field_1'] ?? ''));
         $inv_value_1 = trim($fields['inv_value_1'] ?? '');
@@ -34,11 +36,13 @@ class WidgetView extends CControllerDashboardWidgetView {
         $firmware_counts = [];
         $error = null;
 
+        // Resolve groupids
         $resolved_groupids = [];
         foreach ($groupids as $g) {
             $resolved_groupids[] = is_array($g) ? $g['groupid'] : (string) $g;
         }
 
+        // Build inventory filters
         $inv_filters = [];
         if ($inv_field_1 !== '' && $inv_value_1 !== '' && in_array($inv_field_1, self::VALID_INV_FIELDS, true)) {
             $inv_filters[$inv_field_1] = $inv_value_1;
@@ -47,11 +51,17 @@ class WidgetView extends CControllerDashboardWidgetView {
             $inv_filters[$inv_field_2] = $inv_value_2;
         }
 
+        // Clean host patterns
         $host_patterns_clean = array_filter(array_map('trim', (array) $host_patterns));
-        $has_any_filter = !empty($resolved_groupids) || !empty($host_patterns_clean) || !empty($inv_filters);
+
+        // Clean tags - remove empty ones
+        $active_tags = array_values(array_filter($host_tags, fn($t) => $t['tag'] !== ''));
+
+        $has_any_filter = !empty($resolved_groupids) || !empty($host_patterns_clean)
+            || !empty($inv_filters) || !empty($active_tags);
 
         if (!$has_any_filter) {
-            $error = 'No hosts, host groups, or inventory filters configured. Please edit the widget.';
+            $error = 'No hosts, host groups, inventory filters or tags configured. Please edit the widget.';
         }
         else {
             $host_options = [
@@ -73,8 +83,15 @@ class WidgetView extends CControllerDashboardWidgetView {
                 $host_options['selectInventory'] = array_keys($inv_filters);
             }
 
+            // Pass tags directly to the API
+            if (!empty($active_tags)) {
+                $host_options['evaltype'] = $tags_evaltype;
+                $host_options['tags']     = $active_tags;
+            }
+
             $hosts = API::Host()->get($host_options);
 
+            // Apply inventory value filtering
             if (!empty($inv_filters)) {
                 $resolved_hostids = [];
                 foreach ($hosts as $host) {

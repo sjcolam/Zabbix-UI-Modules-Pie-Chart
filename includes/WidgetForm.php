@@ -8,7 +8,9 @@ use Zabbix\Widgets\{
     Fields\CWidgetFieldPatternSelectHost,
     Fields\CWidgetFieldPatternSelectItem,
     Fields\CWidgetFieldCheckBox,
-    Fields\CWidgetFieldTextBox
+    Fields\CWidgetFieldTextBox,
+    Fields\CWidgetFieldRadioButtonList,
+    Fields\CWidgetFieldTags
 };
 
 class WidgetForm extends CWidgetForm {
@@ -36,6 +38,15 @@ class WidgetForm extends CWidgetForm {
             ->addField(
                 (new CWidgetFieldTextBox('inv_value_2', _('Inventory value 2')))
                     ->setDefault('')
+            )
+            ->addField(
+                (new CWidgetFieldRadioButtonList('host_tags_evaltype', _('Host tags'), [
+                    TAG_EVAL_TYPE_AND_OR => _('And/Or'),
+                    TAG_EVAL_TYPE_OR     => _('Or')
+                ]))->setDefault(TAG_EVAL_TYPE_AND_OR)
+            )
+            ->addField(
+                new CWidgetFieldTags('host_tags')
             )
             ->addField(
                 (new CWidgetFieldPatternSelectItem('items', _('Item patterns')))

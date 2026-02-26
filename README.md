@@ -3,6 +3,7 @@
 A custom Zabbix dashboard widget that displays firmware version distribution across your monitored hosts as an interactive pie chart.
 
 ![Widget screenshot showing a pie chart with firmware version segments and a colour-coded legend](doc/screenshot-dashboard.png)
+(doc/screenshot-edit-widget.png)
 
 ## Features
 
@@ -10,6 +11,7 @@ A custom Zabbix dashboard widget that displays firmware version distribution acr
 - **Flexible host filtering** — filter by host group, host name pattern (`pdu-*`, `*router*`), and/or inventory fields (vendor, model, type, OS, etc.)
 - **Multiple item patterns** — handles environments where different device types use different SNMP OID keys for firmware (e.g. `deviceFirmware.0` and `firmwareVersion.0`)
 - **Wildcard inventory matching** — filter by `vendor=Cisco*` or `model=*PDU*`
+- **Multiple tag matching** — match on tags
 - **Optional legend** showing version, device count, and percentage
 - **Responsive** — redraws automatically when the widget is resized
 - **No external dependencies** — pure HTML5 Canvas rendering
@@ -60,6 +62,7 @@ find /usr/share/zabbix/ui/modules/Zabbix-UI-Modules-Pie-Chart -type d -exec chmo
 | **Inventory value 1** | Value to match, wildcards supported, e.g. `Cisco*` (optional) |
 | **Inventory field 2** | Second inventory filter field (optional, AND'd with field 1) |
 | **Inventory value 2** | Second inventory filter value (optional) |
+| **Host tags** | match tag values (optional) |
 | **Item patterns** *(required)* | SNMP item key or name patterns to find firmware values, e.g. `deviceFirmware.0` |
 | **Show legend** | Toggle the colour-coded legend below the chart |
 

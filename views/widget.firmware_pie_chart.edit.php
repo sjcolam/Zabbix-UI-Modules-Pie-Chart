@@ -30,6 +30,12 @@
             ->setPlaceholder('e.g. Tachyon, Cisco*, *PDU*')
     )
     ->addField(
+        new CWidgetFieldRadioButtonListView($data['fields']['host_tags_evaltype'])
+    )
+    ->addField(
+        new CWidgetFieldTagsView($data['fields']['host_tags'])
+    )
+    ->addField(
         new CWidgetFieldPatternSelectItemView($data['fields']['items'])
     )
     ->addField(
